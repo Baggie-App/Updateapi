@@ -1,46 +1,46 @@
 from django.shortcuts import render
-from cartview.serializers import CartVeiwSerializer,CartVeiwCreateSerializer
-from cartview.models import CartVeiw
+from wishlist.serializers import WishlistSerializer,WishListCreateSerializer
+from wishlist.models import WishList
 from headers import *
 #from cartview.permissions import *
 from rest_framework.decorators import api_view, permission_classes
 
 # Create your views here.
 
-class CartListAPIView(generics.ListAPIView):
+class WishListAPIView(generics.ListAPIView):
 	#permission_classes = (CanCreatePermissionforCustomer,)
 	#__basic_fields = ('city','phonenumber','additionalnumber','orderemail','orderDate')
-	queryset = CartVeiw.objects.all()
-	serializer_class = CartVeiwSerializer
+	queryset = WishList.objects.all()
+	serializer_class = WishlistSerializer
 	#filter_backends = (filters.DjangoFilterBackend, SearchFilter, OrderingFilter)
 	#filter_fields = __basic_fields
 	#search_fields = __basic_fields
 
-class CartCreateAPIView(generics.CreateAPIView):
+class WishCreateAPIView(generics.CreateAPIView):
 	#permission_classes = (CanCreatePermissionforCustomer,)
-	queryset = CartVeiw.objects.all()
-	serializer_class = CartVeiwCreateSerializer
+	queryset = WishList.objects.all()
+	serializer_class = WishListCreateSerializer
 
 
 #single Retrive
 @api_view(['GET'])
 #@permission_classes((CanCreatePermissionforCustomer,CanUpdateDeletePermissionforVendor,))
-def CartDetails(request, pk):
+def WishDetails(request, pk):
 	try:
-		carts = CartVeiw.objects.get(id=pk)
-	except CartVeiw.DoesNotExist:
+		carts = WishList.objects.get(id=pk)
+	except WishList.DoesNotExist:
 		return Response(status=status.HTTP_404_NOT_FOUND)
 
 	if request.method == 'GET':
-		serializer = CartVeiwSerializer(carts, many=False)
+		serializer = WishlistSerializer(carts, many=False)
 		return Response(serializer.data)
 	return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 #update
-class CartUpdateAPIView(generics.UpdateAPIView):
+class WishUpdateAPIView(generics.UpdateAPIView):
     #permission_classes = (CanUpdateDeletePermissionforVendor,)
-    serializer_class = CartVeiwCreateSerializer
-    queryset = CartVeiw.objects.all()
+    serializer_class = WishListCreateSerializer
+    queryset = WishList.objects.all()
     lookup_field = "id"
 
 # class OrderDestroyAPIView(generics.DestroyAPIView):
@@ -51,7 +51,7 @@ class CartUpdateAPIView(generics.UpdateAPIView):
 
 @api_view(['DELETE'])
 #@permission_classes((CanUpdateDeletePermissionforVendor,))
-def cartDelete(request, pk):
-    cart = CartVeiw.objects.get(id=pk)
+def WishDelete(request, pk):
+    cart = WishList.objects.get(id=pk)
     cart.delete()
     return Response("Order Deleted Successfully")

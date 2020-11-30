@@ -9,10 +9,12 @@ from productsCategory.views import(
     #api_create_productCategory_view,
     #api_delete_productCategory_view,
     ProductsCategoryDetailAPIView,
+    ProductsCategoryHomeListAPIView,
 )
 app_name = "productsCategory"
 urlpatterns = [
      #path('', ProductCategoryList.as_view(), name = "List"),
+     path('api/v1/alllist', ProductsCategoryHomeListAPIView.as_view(), name = "productsList"),
      path('api/v1/', ProductsCategoryListAPIView.as_view(), name = "list"),
      path('api/v1/<int:id>', ProductsCategoryDetailAPIView.as_view(), name = "pCategoryDetails"),
      #path('create/', api_create_productCategory_view, name="create"),

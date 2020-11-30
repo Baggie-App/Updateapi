@@ -15,7 +15,7 @@ class CanEditProperty(BasePermission):
         # print("role",role)
         if user.role == 'customers':
             return False
-        if user.role == 'vendor' and user.is_authenticated:
+        if user.role == 'superuser' and user.is_authenticated:
             return True
         else:
             return False

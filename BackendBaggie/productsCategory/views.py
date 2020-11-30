@@ -2,27 +2,50 @@ from productsCategory.models import ProductsCategory
 from headers import *
 from productsCategory.permissions import CanEditProperty
 from rest_framework.decorators import api_view, permission_classes
-from productsCategory.serializers import(ProductsCategorySerializer,
+from productsCategory.serializers import(
+   ProductsCategorySerializer,
    ProductCategoryCreateSerializer,
+   ProductsCategoryforHomeSerializer,
 )
+
+class ProductsCategoryHomeListAPIView(generics.ListAPIView):
+
+	serializer_class = ProductsCategoryforHomeSerializer
+	queryset = ProductsCategory.objects.all()
+
+
+# class ProductsCategoryHomeListAPIView(generics.ListAPIView):
+#    serializer_class = ProductsCategorySerializer
+#
+#    def get_queryset(self):
+#        queryset = ProductsCategory.objects.all()
+#        id = self.request.query_params.getlist('id')
+#        if id:
+#            queryset = queryset.filter(id__in=id)
+#            return queryset
 
 
 class ProductsCategoryListAPIView(generics.ListCreateAPIView):
+		queryset = ProductsCategory.objects.all()
+		serializer_class = ProductsCategorySerializer
+		filter_backends = (filters.DjangoFilterBackend,SearchFilter, OrderingFilter)
+		filterset_fields = ('categoryName',)
+		search_fields = ('categoryName',)
 
-	permission_classes = [CanEditProperty,]
-	try:
-		if permission_classes:
-			queryset = ProductsCategory.objects.all()
-			serializer_class = ProductsCategorySerializer
-			filter_backends = (filters.DjangoFilterBackend,SearchFilter, OrderingFilter)
-			filterset_fields = ('categoryName',)
-			search_fields = ('categoryName',)
-	except Exception as ex:
-		Response('not permission Allowed')
+	#permission_classes = [CanEditProperty,]
+	# try:
+	# 	if permission_classes:
+	# 		queryset = ProductsCategory.objects.all()
+	# 		serializer_class = ProductsCategorySerializer
+	# 		filter_backends = (filters.DjangoFilterBackend,SearchFilter, OrderingFilter)
+	# 		filterset_fields = ('categoryName',)
+	# 		search_fields = ('categoryName',)
+	# except Exception as ex:
+	# 	Response('not permission Allowed')
 
 class ProductsCategoryDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 
-	permission_classes = [CanEditProperty,]
+	#permission_classes = [CanEditProperty,]
 	queryset = ProductsCategory.objects.all()
 	serializer_class = ProductsCategorySerializer
 
