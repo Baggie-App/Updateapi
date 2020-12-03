@@ -4,7 +4,7 @@ from productsCategory.permissions import CanEditProperty
 from rest_framework.decorators import api_view, permission_classes
 from productsCategory.serializers import(
    ProductsCategorySerializer,
-   ProductCategoryCreateSerializer,
+   #ProductCategoryCreateSerializer,
    ProductsCategoryforHomeSerializer,
 )
 
@@ -48,7 +48,6 @@ class ProductsCategoryDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
 	#permission_classes = [CanEditProperty,]
 	queryset = ProductsCategory.objects.all()
 	serializer_class = ProductsCategorySerializer
-
 	lookup_field = "id"
 
 # class ProductCategoryList(APIView):

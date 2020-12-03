@@ -46,6 +46,6 @@ class Products(models.Model):
 
 		image = Image.open(self.productcoverImage)
 		(width, height) = image.size
-		size = ( 400, 400)
+		size = (400, 400)
 		image = image.resize(size, Image.ANTIALIAS)
 		image.save(self.productcoverImage.path)

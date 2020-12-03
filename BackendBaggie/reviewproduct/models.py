@@ -14,4 +14,4 @@ class ProductReview(models.Model):
         ordering: ['-review_at']
 
     def __str__(self):
-        return str(self.review)
+        return str(self.id)

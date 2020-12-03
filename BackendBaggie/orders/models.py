@@ -20,4 +20,4 @@ class  Order(models.Model):
         ordering: ['-orderDate']
 
     def __str__(self):
-        return str(self.orderDate)
+        return str(self.id)
