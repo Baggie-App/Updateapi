@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from productsCategory.models import ProductsCategory
-from products.serializers import ProductNestedSerializer
+from products.serializers import ProductNestedSerializer,ProductHomeNestedSerializer
 from products.models import Products
 from drf_tweaks.serializers import pass_context
 from drf_tweaks.serializers import ModelSerializer
@@ -45,11 +45,11 @@ class ProductsCategoryforHomeSerializer(ModelSerializer):
 	def get_nested_products(self, instance):
 		#print("hello")
 		players = instance.nested_products.order_by('-productUpdate')[:10]
-		return ProductNestedSerializer(players, many=True, context=self.context).data
+		return ProductHomeNestedSerializer(players, many=True, context=self.context).data
 
 	class Meta:
 		model = ProductsCategory
-		fields = ('id','categoryName','created_at', 'updated_at','nested_products')
+		fields = ('id','categoryName','nested_products')
 
 
 ##########################################################################################################

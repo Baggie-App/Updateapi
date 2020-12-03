@@ -3,7 +3,6 @@ from orders.views import (
    OrderListAPIView,
    ordersDetail,
    OrderUpdateAPIView,
-   #OrderDestroyAPIView,
    orderDelete,
    OrderCreateAPIView,
 )

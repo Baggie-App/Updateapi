@@ -19,7 +19,8 @@ class OrderSerializer(WritableNestedModelSerializer):
         'orderemail',
         'orderDate',
         'orderShipped',
-        'choices')
+        'choices',
+        'totalPrice')
 
 
 

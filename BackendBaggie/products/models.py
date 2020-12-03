@@ -1,6 +1,11 @@
 from django.db import models
 from users.models import CustomUser
 from productsCategory.models import ProductsCategory
+from django.core.files import File
+from PIL import Image
+import os
+
+
 
 # Create your models here.
 def upload_productCoverImage(instance, filename, **kwargs):
@@ -16,7 +21,7 @@ class Products(models.Model):
 	  ]
 	productname             = models.CharField(max_length=350, null=True)
 	productpriceoriginal    = models.DecimalField(max_digits=20, decimal_places=3, null=True)
-	productpricesell        = models.DecimalField(max_digits=20, decimal_places=3, null=True)
+	sellproductprice        = models.DecimalField(max_digits=20, decimal_places=3, null=True)
 	percentageofsell        = models.CharField(max_length = 35, null = True)
 	productweight           = models.CharField(max_length = 35, null = True)
 	productinstock          = models.BooleanField(default=True)
@@ -33,7 +38,14 @@ class Products(models.Model):
 		ordering: ['-productUpdate']
 
 	def __str__(self):
-		return str(self.productname)
+		return str(self.id)
 
 	def save(self, *args, **kwargs):
-		super(Products, self).save(*args, **kwargs)
+
+		super(Products, self).save()
+
+		image = Image.open(self.productcoverImage)
+		(width, height) = image.size
+		size = ( 400, 400)
+		image = image.resize(size, Image.ANTIALIAS)
+		image.save(self.productcoverImage.path)

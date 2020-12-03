@@ -27,7 +27,7 @@ urlpatterns = [
      path('auth/', include('users.urls')),
 
      #productsCategory
-     path('productCategory/', include('productsCategory.urls')),
+     path('productcategory/', include('productsCategory.urls')),
      # #products
      path('products/', include('products.urls')),
 
@@ -35,7 +35,7 @@ urlpatterns = [
 
      path('orderdetails/', include('orderDetails.urls')),
 
-     path('productImage/',include('productsImage.urls')),
+     path('productimage/',include('productsImage.urls')),
 
      #path('exam/', include('poll.urls')),
 

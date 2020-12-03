@@ -16,7 +16,7 @@ class OrderNestedDetailsSerializer(serializers.ModelSerializer):
         'orderprice',
         'orderQuantity',
         #'orderTrakingNumber',
-        'toalprice'
+        'ordertotal'
         )
         read_only_fields=('order',)
 
@@ -32,6 +32,6 @@ class OrderDetailsSerializer(serializers.ModelSerializer):
         'orderprice',
         'orderQuantity',
         #'orderTrakingNumber',
-        'toalprice'
+        'ordertotal'
         )
         read_only_fields=('order',)

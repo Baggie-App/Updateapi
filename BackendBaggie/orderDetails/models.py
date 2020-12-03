@@ -10,7 +10,7 @@ class OrderDetails(models.Model):
     productID       = models.ForeignKey(Products, on_delete=models.DO_NOTHING)
     orderprice      = models.DecimalField(max_digits=150, decimal_places=3, null=False)
     orderQuantity   = models.CharField(max_length=150, null=True)
-    toalprice       = models.DecimalField(max_digits=150, decimal_places=3, null=False)
+    ordertotal      = models.DecimalField(max_digits=150, decimal_places=3, null=False)
     # orderTrakingNumber= models.CharField(
     #            max_length = 10,
     #            blank=True,
@@ -21,4 +21,4 @@ class OrderDetails(models.Model):
     """docstring forOrderDetails."""
 
     def __str__(self):
-        return str(self.orderDetailsName)
+        return str(self.id)

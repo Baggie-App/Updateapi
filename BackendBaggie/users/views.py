@@ -251,7 +251,7 @@ class LogoutAPIView(generics.GenericAPIView):
 
 
 
-
+#Otp validation using Phone 
 class ValidatePhoneSendOTP(APIView):
 
     def post(self, request, *args, **kwargs):

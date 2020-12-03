@@ -28,6 +28,7 @@ class Migration(migrations.Migration):
                 ('orderShipped', models.BooleanField(default=False)),
                 ('orderTrakingNumber', models.CharField(blank=True, max_length=550, null=True)),
                 ('customerID', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                ('totalPrice', models.CharField(blank=True, max_length=150, null=True)),
             ],
         ),
     ]

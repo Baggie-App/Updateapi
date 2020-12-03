@@ -13,6 +13,7 @@ class  Order(models.Model):
     orderemail      = models.EmailField(verbose_name = "email", max_length = 35, null=True)
     orderDate       = models.DateTimeField(auto_now=True)
     orderShipped    = models.BooleanField(default=False)
+    totalPrice      = models.CharField(max_length=150, null=True, blank=True)
 
     """docstring for  Order."""
     class Meta:

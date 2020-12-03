@@ -1,6 +1,9 @@
 from django.db import models
+import jwt
+import random
+import os
+import requests
 from django.utils.translation import ugettext_lazy as _
-# Create your models here.
 from django.contrib.auth.models import (
 	AbstractBaseUser, BaseUserManager,PermissionsMixin)
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -9,10 +12,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 from datetime import datetime, timedelta
 from django.conf import settings
 from django.core.validators import RegexValidator
-import jwt
-import random
-import os
-import requests
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFill
 
@@ -127,32 +126,7 @@ class CustomUser(AbstractBaseUser,PermissionsMixin):
          """
          return self.mobileNumber
 
-	# @property
-	# def token(self):
-	# 	print("hello i am inside token")
-	# 	"""
-	# 	We need to make the method for creating our token private. At the
-	# 	same time, it's more convenient for us to access our token with
-	# 	`user.token` and so we make the token a dynamic property by wrapping
-	# 	in in the `@property` decorator.
-	# 	"""
-	# 	return self._generate_jwt_token()
-	#
-	# def _generate_jwt_token(self):
-	# 	"""
-	# 	We generate JWT token and add the user id, username and expiration
-	# 	as an integer.
-	# 	"""
-	# 	token_expiry = datetime.now() + timedelta(hours=24)
-	#
-	# 	token = jwt.encode({
-	# 		'id': self.pk,
-	# 		'email': self.get_email,
-	# 		'mobileNumber':self.get_mobileNumber,
-	# 		'exp': int(token_expiry.strftime('%s'))
-	# 	}, settings.SECRET_KEY, algorithm='HS256')
-	#
-	# 	return token.decode('utf-8')
+
 
 	def tokens(self):
 		print(self.pk)
@@ -216,5 +190,32 @@ class BlackList(BaseAbstractModel):
         This method deletes tokens older than one day
         """
         past_24 = datetime.now() - timedelta(hours=24)
+
+	# @property
+	# def token(self):
+	# 	print("hello i am inside token")
+	# 	"""
+	# 	We need to make the method for creating our token private. At the
+	# 	same time, it's more convenient for us to access our token with
+	# 	`user.token` and so we make the token a dynamic property by wrapping
+	# 	in in the `@property` decorator.
+	# 	"""
+	# 	return self._generate_jwt_token()
+	#
+	# def _generate_jwt_token(self):
+	# 	"""
+	# 	We generate JWT token and add the user id, username and expiration
+	# 	as an integer.
+	# 	"""
+	# 	token_expiry = datetime.now() + timedelta(hours=24)
+	#
+	# 	token = jwt.encode({
+	# 		'id': self.pk,
+	# 		'email': self.get_email,
+	# 		'mobileNumber':self.get_mobileNumber,
+	# 		'exp': int(token_expiry.strftime('%s'))
+	# 	}, settings.SECRET_KEY, algorithm='HS256')
+	#
+	# 	return token.decode('utf-8')
 
         BlackList.objects.filter(created_at__lt=past_24).delete()
